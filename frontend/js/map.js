@@ -6,7 +6,6 @@ const continents = {
   'South America': 'South America',
   'Oceania': 'Oceania'
 };
-
 document.querySelectorAll('.container path').forEach(path => {
   path.addEventListener('mouseover', function(event) {
       const tooltip = document.getElementById('tooltip');

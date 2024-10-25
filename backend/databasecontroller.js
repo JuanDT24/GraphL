@@ -8,6 +8,8 @@ const client = new Client({
     database:"labbases"
 })
 
+client.connect()
+    .then(() => console.log('Conexión a la base de datos establecida.'))
+    .catch(err => console.error('Error al conectar a la base de datos', err));
 
-
-module.exports= client
+module.exports= client;

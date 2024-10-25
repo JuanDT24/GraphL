@@ -3,25 +3,42 @@
 <head>
     <title>GraphL</title>
     <meta charset ='utf-8'>
-    <link href="css/mapstyles.css" rel="stylesheet">
+    <link href="/css/mapstyles.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <nav class="navbar">
     <a href="#" class="logo">GraphL</a>
-    <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="map.html">Map</a></li>
-        <li><a href="MeetTheTeam.html">MeetTheTeam</a></li>
+    <ul class="nav-links" id="buttons">
+        <li data-endpoint="/"><a href="#">Home</a></li>
+        <li data-endpoint="/map/countries"><a href="#">Map</a></li>
+        <li data-endpoint='/meet-the-team'><a href="#">MeetTheTeam</a></li>
     </ul>
 </nav>  
 <br>
 <div class="dropdown">
     <button class="dropbtn">Map Type</button>
     <div class="dropdown-content">
-      <a href="contmap.html">Continental Map</a>
-      <a href="map.html">Map per Country</a>
+        <a href="#" class="dropdown-item" data-endpoint="/map/continents">Continental Map</a>
+        <a href="#" class="dropdown-item" data-endpoint="/map/countries">Map per Country</a>
     </div>
 </div>
+<script>
+document.getElementById('buttons').addEventListener('click', function(e) {  
+    let li = e.target.closest('li[data-endpoint]');
+    if (li) {
+      const endpoint = li.getAttribute('data-endpoint');
+      window.location.href = endpoint; 
+     }
+    });
+        
+      document.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', function (e) {
+        e.preventDefault(); 
+        const endpoint = item.getAttribute('data-endpoint'); 
+        window.location.href = endpoint; 
+    });
+});
+</script>
 <body>
     <div class="container">
         <svg version="1.1" id="katman_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 533">
