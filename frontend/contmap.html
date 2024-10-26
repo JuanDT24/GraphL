@@ -545,7 +545,7 @@ document.getElementById('buttons').addEventListener('click', function(e) {
         path.addEventListener('click', function(event) {
             const continentid = continents[this.id];
     
-            const endpoint = `/api/continents/${continentid}`;
+            const endpoint = `/map/continents/${continentid}`;
             window.location.href = endpoint; 
         });
     });
