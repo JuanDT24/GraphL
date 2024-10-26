@@ -23,7 +23,7 @@ p {
 }
 
 /* Dropdown Button */
-.dropbtn {
+.dropbtn {  
     background-color: #04AA6D;
     color: white;
     padding: 16px;
@@ -65,7 +65,32 @@ p {
   .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 
-  /* Navbar styling */
+.custom-toggle-group {
+    position: relative;
+    display: inline-block;
+}
+
+.custom-toggle-btn {
+    background-color: #212121;
+    color: white;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Style for when the button is selected */
+.btn-check:checked + .custom-toggle-btn {
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* Hover effect */
+.custom-toggle-btn:hover {
+    background-color: #ddd;
+}
+
+
 .navbar {
     background-color: #333;
     overflow: hidden;
