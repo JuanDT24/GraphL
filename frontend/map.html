@@ -983,4 +983,14 @@
 </body>
 <div id="tooltip" class="tooltip"></div>
 <script src="/js/map.js"></script>
+<script>
+    document.querySelectorAll('.container path').forEach(path => {
+        path.addEventListener('click', function(event) {
+            const countryid = countries[this.id];
+            const endpoint = `/api/countries/${countryid}/total_cases`;
+            window.location.href = endpoint; 
+        });
+    });
+    
+</script>
 </html>

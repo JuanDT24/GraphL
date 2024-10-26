@@ -540,5 +540,15 @@ document.getElementById('buttons').addEventListener('click', function(e) {
 </body>
 <div id="tooltip" class="tooltip"></div>
 <script src="/js/contmap.js"></script>
-
+<script>
+    document.querySelectorAll('.container path').forEach(path => {
+        path.addEventListener('click', function(event) {
+            const continentid = continents[this.id];
+    
+            const endpoint = `/api/continents/${continentid}`;
+            window.location.href = endpoint; 
+        });
+    });
+    
+</script>
 </html>
