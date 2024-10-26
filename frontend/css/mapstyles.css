@@ -112,13 +112,13 @@ p {
 }
 
 .container path {
-    fill: #04AA6D;
+    /*fill: #04AA6D;*/
     stroke: #212121;
     stroke-width: 2px;
 }
 
 .container :hover{
-    fill: #107b54;
+    /*fill: #107b54;*/
     cursor: pointer;
 }
 
