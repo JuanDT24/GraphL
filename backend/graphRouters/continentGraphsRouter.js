@@ -50,5 +50,21 @@ continentGraphsRouter.route('/:continent/totaldeaths').get(async(req,res) =>{
         res.status(500).send('Error en la consulta');
     }
 })
+continentGraphsRouter.route('/:continent/population').get(async(req,res) =>{
+    try{
+        const dbRes= await client.query(`with population_per_country as (
+            Select distinct location, population, continent
+            from covid_data where continent is not null)
+            Select distinct continent, SUM(p.population) as continent_population
+            from population_per_country p  
+            where continent = '${req.params.continent}'
+            group by continent`)
+        res.send(dbRes.rows);
+    }catch(err){
+        console.error('Error en la consulta', err);
+        res.status(500).send('Error en la consulta');
+    }
+})
+
 
 module.exports = continentGraphsRouter;
