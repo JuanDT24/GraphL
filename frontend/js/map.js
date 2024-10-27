@@ -236,6 +236,50 @@ document.querySelectorAll("path").forEach(path => {
 });
 }
 
+const legends = {
+    total_cases: [
+        { color: "#800026", label: "> 5,000,000" },
+        { color: "#BD0026", label: "1,000,001 - 5,000,000" },
+        { color: "#E31A1C", label: "100,001 - 1,000,000" },
+        { color: "#FC4E2A", label: "50,001 - 100,000" },
+        { color: "#FD8D3C", label: "10,001 - 50,000" },
+        { color: "#FEB24C", label: "5,001 - 10,000" },
+        { color: "#FED976", label: "1,001 - 5,000" },
+        { color: "#FFEDA0", label: "1 - 1,000" }
+    ],
+    total_deaths: [
+        { color: "#800026", label: "> 100,000" },
+        { color: "#BD0026", label: "50,001 - 100,000" },
+        { color: "#E31A1C", label: "10,001 - 50,000" },
+        { color: "#FC4E2A", label: "5,001 - 10,000" },
+        { color: "#FD8D3C", label: "1,001 - 5,000" },
+        { color: "#FEB24C", label: "501 - 1,000" },
+        { color: "#FED976", label: "101 - 500" },
+        { color: "#FFEDA0", label: "1 - 100" }
+    ]
+};
+
+function updateLegend(dataType) {
+    const legendContainer = document.getElementById('legend');
+    legendContainer.innerHTML = '';  // Clear previous legend
+
+    legends[dataType].forEach(item => {
+        const legendItem = document.createElement('div');
+        legendItem.classList.add('legend-item');
+
+        const colorBox = document.createElement('div');
+        colorBox.classList.add('legend-color');
+        colorBox.style.backgroundColor = item.color;
+
+        const label = document.createElement('span');
+        label.textContent = item.label;
+
+        legendItem.appendChild(colorBox);
+        legendItem.appendChild(label);
+        legendContainer.appendChild(legendItem);
+    });
+}
+
 function fetchData(dataType) {
 fetch('/api/countries/total_per_country')
     .then(response => {
@@ -244,6 +288,7 @@ fetch('/api/countries/total_per_country')
     })
     .then(data => {
         Choropleth_map(data, dataType); 
+        updateLegend(dataType);
     })
     .catch(error => {
         console.error('Error fetching data:', error);

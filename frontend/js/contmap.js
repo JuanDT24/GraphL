@@ -39,6 +39,41 @@ document.querySelectorAll("path").forEach(path => {
 });
 }
 
+const legends = {
+    total_cases: [
+        { color: "#800026", label: "> 200,000,000" },
+        { color: "#FC4E2A", label: "50,000,001 - 200,000,000" },
+        { color: "#FFEDA0", label: "0 - 50,000,000" }
+    ],
+    total_deaths: [
+        { color: "#800026", label: "> 2,000,000" },
+        { color: "#FC4E2A", label: "1,000,001 - 2,000,000" },
+        { color: "#FFEDA0", label: "0 - 1,000,000" }
+    ]
+};
+
+function updateLegend(dataType) {
+    const legendContainer = document.getElementById('legend');
+    legendContainer.innerHTML = '';  // Clear previous legend
+
+    // Get the appropriate legend range based on the data type
+    legends[dataType].forEach(item => {
+        const legendItem = document.createElement('div');
+        legendItem.classList.add('legend-item');
+
+        const colorBox = document.createElement('div');
+        colorBox.classList.add('legend-color');
+        colorBox.style.backgroundColor = item.color;
+
+        const label = document.createElement('span');
+        label.textContent = item.label;
+
+        legendItem.appendChild(colorBox);
+        legendItem.appendChild(label);
+        legendContainer.appendChild(legendItem);
+    });
+}
+
 function fetchData(dataType) {
 fetch('/api/continents/total_per_continent')
     .then(response => {
@@ -47,6 +82,7 @@ fetch('/api/continents/total_per_continent')
     })
     .then(data => {
         Choropleth_map(data, dataType); 
+        updateLegend(dataType);
     })
     .catch(error => {
         console.error('Error fetching data:', error);
