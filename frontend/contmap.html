@@ -15,6 +15,7 @@
     </ul>
 </nav>  
 <br>
+
 <div class="dropdown">
     <button class="dropbtn">Map Type</button>
     <div class="dropdown-content">
@@ -22,6 +23,15 @@
         <a href="#" class="dropdown-item" data-endpoint="/map/countries">Map per Country</a>
     </div>
 </div>
+
+<div class="btn-group custom-toggle-group" role="group" aria-label="Changing the displayed data">
+    <input type="radio" class="btn-check" name="btnradio" id="total_cases" autocomplete="off" checked>
+    <label class="btn custom-toggle-btn" for="total_cases">Total Cases</label>
+
+    <input type="radio" class="btn-check" name="btnradio" id="total_deaths" autocomplete="off">
+    <label class="btn custom-toggle-btn" for="total_deaths">Total Deaths</label>
+</div>
+
 <script>
 document.getElementById('buttons').addEventListener('click', function(e) {  
     let li = e.target.closest('li[data-endpoint]');
@@ -544,8 +554,7 @@ document.getElementById('buttons').addEventListener('click', function(e) {
     document.querySelectorAll('.container path').forEach(path => {
         path.addEventListener('click', function(event) {
             const continentid = continents[this.id];
-    
-            const endpoint = `/map/continents/${continentid}`;
+            const endpoint = `/map/continents/${continentid}?continent=${encodeURIComponent(continentid)}`;
             window.location.href = endpoint; 
         });
     });

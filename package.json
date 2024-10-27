@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "This is a data visualization app, we will be analyzing statistics from the game league of legends, specifically it's professional games, to compare winrates of champions, players, teams, etc.",
   "dependencies": {
+    "chart": "^0.1.2",
     "express": "^4.21.0",
     "pg": "^8.13.0"
   },
