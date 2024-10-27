@@ -4,11 +4,11 @@ const client = require("../databasecontroller.js");
 
 countriesGraphsRouter.route("/total_per_country").get(async(req, res)=>{
     try{
-    const dbRes = await client.query(`SELECT DISTINCT ON (location)
-    location, total_cases, total_deaths
- FROM covid_data
- WHERE total_deaths IS NOT NULL	and continent is not null
- ORDER BY location, total_deaths DESC;`);
+        const dbRes = await client.query(`SELECT DISTINCT ON (location)
+        location, total_cases, total_deaths
+        FROM covid_data 
+        WHERE total_deaths IS NOT NULL and continent is not null
+        ORDER BY location, date DESC`);
     res.send(dbRes.rows);
     }catch(err){
     console.error("Error en la consulta", err);

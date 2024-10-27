@@ -10,12 +10,12 @@ continentGraphsRouter.route('/total_per_continent').get(async(req, res) => {
             SELECT DISTINCT ON (location)
                 continent, location, total_cases, total_deaths
             FROM covid_data
-            WHERE total_cases IS NOT NULL	and continent is not null
-            ORDER BY location, total_deaths DESC
+            WHERE total_cases IS NOT NULL    and continent is not null
+            ORDER BY location, date DESC
         )
         SELECT continent, 
             SUM(total_cases) AS total_cases,
-			SUM(total_deaths) as total_deaths
+            SUM(total_deaths) as total_deaths
         FROM max_cases_per_location
         GROUP BY continent
         ORDER BY total_cases DESC;`);
@@ -61,7 +61,7 @@ continentGraphsRouter.route('/:continent/continent_totals').get(async(req, res) 
                 continent, location, total_cases, total_deaths
             FROM covid_data
             WHERE total_cases IS NOT NULL    and continent is not null and continent = '${req.params.continent}'
-            ORDER BY location, total_deaths DESC
+            ORDER BY location, date DESC
         ),
        population_per_country as(
        Select distinct on (location) continent, location, population
