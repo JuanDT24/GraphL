@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang ='en'>
+<head>
+    <title>GraphL</title>
+    <meta charset ='utf-8'>
+    <link href="/css/countrystyles.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+</head>
+<h1 id="country-title">GraphL</h1>
+<script>
+    const urlParams = new URLSearchParams(window.location.search)
+    const countryName = urlParams.get('country')
+    if (countryName){
+        document.getElementById('country-title').textContent=countryName;
+    }
+</script>
+<hr>
+<br>
+<nav class="navbar">
+    <a href="#" class="logo">GraphL</a>
+    <ul class="nav-links" id="buttons">
+        <li data-endpoint="/"><a href="#">Home</a></li>
+        <li data-endpoint="/map/countries"><a href="#">Map</a></li>
+        <li data-endpoint="/meet-the-team"><a href="#">MeetTheTeam</a></li>
+    </ul>
+</nav>
+<script src="/js/index.js"></script>
+<body>
+    <div class="charts-container">
+        <div class="chart-container">
+            <canvas id="vs"></canvas>
+        </div>
+    </div>  
+
+    <div class="btn-group custom-toggle-group" role="group" aria-label="Changing the displayed data">
+        <input type="radio" class="btn-check" name="btnradio" id="total_cases" autocomplete="off" checked>
+        <label class="btn custom-toggle-btn" for="total_cases">Total Cases</label>
+    
+        <input type="radio" class="btn-check" name="btnradio" id="total_deaths" autocomplete="off">
+        <label class="btn custom-toggle-btn" for="total_deaths">Total Deaths</label>
+    </div>
+
+    <div class="charts-container">
+        <div class="chart-container">
+            <canvas id="bar"></canvas>
+        </div>
+    </div>  
+
+    <script src="/js/country.js"></script>
+        
+</body>
+</html>

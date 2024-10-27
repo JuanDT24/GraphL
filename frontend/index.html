@@ -3,10 +3,22 @@
 <head>
     <title>GraphL</title>
     <meta charset ='utf-8'>
-    <link href="styles.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<h1>GraphL</h1>
+<hr>
+<br>
 <body>
-    <p class="text">A data visualization app, we will be using league of legends esports statistics</p>
+    <nav class="navbar">
+        <a href="#" class="logo">GraphL</a>
+        <ul class="nav-links" id="buttons">
+            <li data-endpoint="/"><a href="#">Home</a></li>
+            <li data-endpoint="/map/countries"><a href="#">Map</a></li>
+            <li data-endpoint="meet-the-team"><a href="#">MeetTheTeam</a></li>
+        </ul>
+    </nav>
+        <p class="text">A data visualization app, we will be using league of legends esports statistics</p>
+        <script src="js/index.js"></script>
 </body>
 </html>

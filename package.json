@@ -1,15 +1,21 @@
 {
   "name": "data_app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "../index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "devStart": "nodemon backend/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "This is a data visualization app, we will be analyzing statistics from the game league of legends, specifically it's professional games, to compare winrates of champions, players, teams, etc.",
   "dependencies": {
-    "express": "^4.21.0"
+    "chart": "^0.1.2",
+    "express": "^4.21.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

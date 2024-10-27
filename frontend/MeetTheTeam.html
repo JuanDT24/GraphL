@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MeetTheTeam</title>
+    <meta charset ='utf-8'>
+    <link href="/css/TeamStyles.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<h1>Meet The Team</h1>
+<hr>
+<br>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">GraphL</a>
+        <ul class="nav-links" id="buttons">
+            <li data-endpoint="/"><a href="#">Home</a></li>
+            <li data-endpoint="/map/countries"><a href="#">Map</a></li>
+            <li data-endpoint='/meet-the-team'><a href="#">MeetTheTeam</a></li>
+        </ul>
+    </nav> 
+    <br>
+    <main>
+        <section>
+            <img src="/images/brito.jpg" alt="Member Name">
+            <h2>Ricardo Brito</h2>
+            <h3>Front End Developer</h3>
+        </section>
+        <section>
+            <img src="/images/tirado.jpg" alt="Member Name">
+            <h2>Juan Tirado</h2>
+            <h3>Back End Developer</h3>
+        </section>
+        <section>
+            <img src="/images/toro.jpg" alt="Member Name">
+            <h2>Alejandro Toro</h2>
+            <h3>Database Developer</h3>
+        </section>
+    </main>
+</body>
+<script>
+    document.getElementById('buttons').addEventListener('click', function(e) {  
+        let li = e.target.closest('li[data-endpoint]');
+        if (li) {
+            const endpoint = li.getAttribute('data-endpoint');
+            window.location.href = endpoint; 
+        }
+    });
+</script>
+</html>
