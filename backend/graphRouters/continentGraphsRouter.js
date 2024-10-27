@@ -25,6 +25,34 @@ continentGraphsRouter.route('/total_per_continent').get(async(req, res) => {
         res.status(500).send("Error en la consulta");
     }   
 })
+continentGraphsRouter.route('/:continent/continent_totals').get(async(req, res) => {
+    try {
+        const dbRes = await client.query(`WITH max_cases_per_location AS (
+            SELECT DISTINCT ON (location)
+                continent, location, total_cases, total_deaths
+            FROM covid_data
+            WHERE total_cases IS NOT NULL	and continent is not null and continent = '${req.params.continent}'
+            ORDER BY location, total_deaths DESC
+        ),
+       population_per_country as(
+       Select distinct on (location) continent, location, population
+       from covid_data where continent is not null
+       order by location
+)
+        SELECT m.continent, 
+            SUM(total_cases) AS total_cases,
+			SUM(total_deaths) as total_deaths,
+			SUM(p.population) as population
+        FROM max_cases_per_location m join population_per_country p
+		on m.location=p.location
+        GROUP BY m.continent
+        ORDER BY total_cases DESC;`);
+        res.send(dbRes.rows)
+    } catch (err) {
+        console.error("Error en la consulta", err);
+        res.status(500).send("Error en la consulta");
+    }   
+})
 
 continentGraphsRouter.route('/:continent/totalcases').get(async(req, res) => {
     try {
@@ -85,6 +113,7 @@ continentGraphsRouter.route('/:continent/population').get(async(req,res) =>{
         res.status(500).send('Error en la consulta');
     }
 })
+
 
 
 module.exports = continentGraphsRouter;
