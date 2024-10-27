@@ -987,7 +987,7 @@
     document.querySelectorAll('.container path').forEach(path => {
         path.addEventListener('click', function(event) {
             const countryid = countries[this.id];
-            const endpoint = `/api/countries/${countryid}/total_cases`;
+            const endpoint = `/map/countries/${countryid}`;
             window.location.href = endpoint; 
         });
     });

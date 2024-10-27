@@ -16,5 +16,4 @@ graphrouter.route('/continents/:continent').get((req, res)=>{
     res.sendFile(path.join(__dirname, '../frontend/continent.html'))
 })
 
-
 module.exports=graphrouter;
