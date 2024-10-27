@@ -60,5 +60,21 @@ ORDER BY location, total_deaths DESC;`);
     res.status(500).send("Error en la consulta");
     }
 })
+countriesGraphsRouter.route("/:country/new_cases_per_month").get(async(req, res) => {
+try{
+const dbRes= await client.query (`with new_cases_per_month as(
+    Select location, TO_CHAR(date, 'YYYY-MM') as mes, new_cases
+    from covid_data
+    )
+    Select location, mes, SUM(new_cases)
+    from new_cases_per_month
+    where location = '${req.params.country}'
+    group by location, mes`)
+res.send(dbRes.rows);
+}catch(err){
+    console.error("Error en la consulta", err);
+    res.status(500).send("Error en la consulta");
+}
+})
 
 module.exports = countriesGraphsRouter;
