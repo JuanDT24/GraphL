@@ -219,7 +219,7 @@ if (dataType == "total_deaths"){
 }
 
 function Choropleth_map(data, dataType) {
-currentType = dataType;  // Update the current data type
+currentType = dataType;
 dataLookup = data.reduce((acc, countryData) => {
     acc[countryData.location] = parseInt(countryData[dataType], 10) || 0;
     return acc;
