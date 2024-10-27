@@ -4,7 +4,27 @@ const client = require("../databasecontroller.js")
 
 
 
-
+continentGraphsRouter.route('/total_per_continent').get(async(req, res) => {
+    try {
+        const dbRes = await client.query(`WITH max_cases_per_location AS (
+            SELECT DISTINCT ON (location)
+                continent, location, total_cases, total_deaths
+            FROM covid_data
+            WHERE total_cases IS NOT NULL	and continent is not null
+            ORDER BY location, total_deaths DESC
+        )
+        SELECT continent, 
+            SUM(total_cases) AS total_cases,
+			SUM(total_deaths) as total_deaths
+        FROM max_cases_per_location
+        GROUP BY continent
+        ORDER BY total_cases DESC;`);
+        res.send(dbRes.rows)
+    } catch (err) {
+        console.error("Error en la consulta", err);
+        res.status(500).send("Error en la consulta");
+    }   
+})
 
 continentGraphsRouter.route('/:continent/totalcases').get(async(req, res) => {
     try {

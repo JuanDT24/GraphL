@@ -15,37 +15,19 @@ countriesGraphsRouter.route("/total_per_country").get(async(req, res)=>{
     res.status(500).send("Error en la consulta");
     }
 })
-countriesGraphsRouter.route("/:country/total_cases").get(async(req, res)=>{
-    try{
-    const dbRes = await client.query(`Select TO_CHAR(date, 'YYYY-MM-DD') as date, total_cases
-    from covid_data
-    where location = '${req.params.country}'
-    order by date, total_cases;`);
-    res.send(dbRes.rows);
-    }catch(err){
-    console.error("Error en la consulta", err);
-    res.status(500).send("Error en la consulta");
-    }
-})
-countriesGraphsRouter.route("/:country/total_deaths").get(async(req, res)=>{
-    try{
-    const dbRes = await client.query(`Select TO_CHAR(date, 'YYYY-MM-DD') as date, total_deaths
-    from covid_data
-    where location = '${req.params.country}'
-    order by date, total_deaths;`);
-    res.send(dbRes.rows);
-    }catch(err){
-    console.error("Error en la consulta", err);
-    res.status(500).send("Error en la consulta");
-    }
-})
+
 
 countriesGraphsRouter.route("/:country/total_cases_vs_total_deaths").get(async(req, res)=>{
     try{
-    const dbRes = await client.query(`Select TO_CHAR(date, 'YYYY-MM-DD') as date, total_cases, total_deaths
-    from covid_data
-    where location = '${req.params.country}'
-    order by date, total_cases,  total_deaths;`);
+    const dbRes = await client.query(`with cases_per_month as(
+        Select DISTINCT ON(mes) TO_CHAR(date, 'YYYY-MM') as mes, total_cases, total_deaths, location
+        from covid_data where location='${req.params.country}'
+        order by mes, total_deaths desc
+        ) 
+        
+        Select c.location, c.mes, c.total_cases, c.total_deaths
+        from cases_per_month c
+        `);
     res.send(dbRes.rows);
     }catch(err){
     console.error("Error en la consulta", err);
