@@ -12,7 +12,7 @@ let currentType = 'total_cases'
 function getColor(value, dataType) {
 if (dataType == "total_deaths"){
     if (value > 2000000) return "#800026";
-    else if (value > 100000) return "#FC4E2A";
+    else if (value > 1000000) return "#FC4E2A";
     else return "#FFEDA0";
 }else if(dataType == "total_cases"){
     if (value > 200000000) return "#800026";
@@ -77,6 +77,8 @@ document.querySelectorAll('.container path').forEach(path => {
       const tooltip = document.getElementById('tooltip');
       const continentName = continents[this.id]; // Assuming each path has an ID like 'continent1'
       tooltip.textContent = continentName;
+      const value = dataLookup[this.id] || 'No data';
+      tooltip.textContent = `${continentName}: ${value}`;
       tooltip.style.display = 'block';
   });
 
