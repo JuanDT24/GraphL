@@ -60,10 +60,6 @@ const urlParams = new URLSearchParams(window.location.search);
                         legend: {
                             position: 'top',
                         },
-                        title: {
-                            display: true,
-                            text: barmode === 'Cases' ? 'Total Cases' : 'Total Deaths'
-                          }
                     },
                 },
             });
